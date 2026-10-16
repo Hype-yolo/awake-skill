@@ -1,0 +1,23 @@
+name: Offline controller tests
+on: [push, pull_request, workflow_dispatch]
+permissions:
+  contents: read
+jobs:
+  macos:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Shell syntax
+        run: |
+          bash -n awake/scripts/macos/install.sh
+          bash -n awake/scripts/macos/uninstall.sh
+          sh -n awake/scripts/macos/root-helper.sh
+      - name: Mocked controller tests
+        run: python3 awake/scripts/macos/test-helper.py
+  windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: PowerShell 5.1 mocked controller tests
+        shell: powershell
+        run: .\awake\scripts\windows\test-awake.ps1
