@@ -20,10 +20,12 @@ macOS 默认文件：`~/Library/Application Support/AwakeSkill/config.json`，�
 Windows 使用原生 Windows PowerShell 5.1；配置脚本不需要管理员权限：
 
 ```powershell
-& .\scripts\windows\config.ps1 -Action read
-& .\scripts\windows\config.ps1 -Action save -Mode existing
-& .\scripts\windows\config.ps1 -Action save -Mode hotspot -Ssid 'My Phone'
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\scripts\windows\config.ps1 -Action read
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\scripts\windows\config.ps1 -Action save -Mode existing
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\scripts\windows\config.ps1 -Action save -Mode hotspot -Ssid 'My Phone'
 ```
+
+上述执行策略仅作用于该次 PowerShell 进程，不修改系统策略；若组织策略阻止执行，报告限制，不绕过组织策略。
 
 Windows 默认文件：当前用户 LocalApplicationData 下的 `AwakeSkill\config.json`。保留用户目录的访问权限；不放到共享目录、ProgramData 或仓库内。命令中的 SSID 若含单引号需按 PowerShell 字面量规则转义；不得把原始名称拼入可执行代码。
 
@@ -37,7 +39,7 @@ Windows 默认文件：当前用户 LocalApplicationData 下的 `AwakeSkill\conf
 }
 ```
 
-Windows 的 platform 为 `windows`；保留网络时 network 为 `{"mode":"existing","ssid":null}`。不保存密码、令牌、管理员凭据或“已授权永久免验证”的标记。配置不在不同电脑之间自动同步；另一平台的配置、未知版本或损坏 JSON 必须报告，保留原文件，不能当作缺失直接覆盖。用户要求修复时先备份原文件，再重新配置。脚本的自定义路径参数仅用于隔离测试，不用于正常调用。
+Windows 的 platform 为 `windows`；保留网络时 network 为 `{"mode":"existing","ssid":null}`。不保存密码、令牌、管理员凭据或“已授权永久免验证”的标记。配置不在不同电脑之间自动同步；另一平台的配置、未知版本或损坏 JSON 必须报告，保留原文件，不能当作缺失直接覆盖。用户要求修复时先将原文件重命名为带时间戳的备份，确认原配置路径已空出，再重新配置；只复制备份仍会被脚本拒绝覆盖。脚本的自定义路径参数仅用于隔离测试，不用于正常调用。
 
 ## 首次询问与前置条件
 
