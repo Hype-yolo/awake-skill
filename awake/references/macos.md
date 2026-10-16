@@ -4,7 +4,7 @@ This backend uses a narrowly privileged, root-owned helper and a launchd watchdo
 
 ## Installation and commands
 
-From the checked-out repository root, inspect the scripts, then run:
+First follow [per-user setup](setup.md). For installed skills, resolve paths from the actual Skill directory; the examples below use the repository root. Inspect the scripts, then run:
 
 ```sh
 sudo /bin/bash awake/scripts/macos/install.sh

@@ -12,6 +12,8 @@ jobs:
           bash -n awake/scripts/macos/install.sh
           bash -n awake/scripts/macos/uninstall.sh
           sh -n awake/scripts/macos/root-helper.sh
+      - name: Per-user configuration tests
+        run: python3 awake/scripts/macos/test-config.py
       - name: Mocked controller tests
         run: python3 awake/scripts/macos/test-helper.py
   windows:
@@ -21,3 +23,6 @@ jobs:
       - name: PowerShell 5.1 mocked controller tests
         shell: powershell
         run: .\awake\scripts\windows\test-awake.ps1
+      - name: PowerShell 5.1 per-user configuration tests
+        shell: powershell
+        run: .\awake\scripts\windows\test-config.ps1

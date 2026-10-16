@@ -4,7 +4,7 @@ Windows needs its own implementation. `caffeinate` and `pmset` are macOS tools. 
 
 ## Run
 
-From the repository root, `cd awake`. Open **Windows PowerShell as Administrator**, using native `powershell.exe` 5.1, not WSL or PowerShell 7. On 64-bit Windows use 64-bit PowerShell; the controller rejects 32-bit PowerShell on a 64-bit OS:
+First follow [per-user setup](setup.md) in the ordinary user context. Saved network preferences do not grant elevation. The power controller still requires administrator rights on each invocation; never disable UAC. From the repository root, `cd awake`. Open **Windows PowerShell as Administrator**, using native `powershell.exe` 5.1, not WSL or PowerShell 7. On 64-bit Windows use 64-bit PowerShell; the controller rejects 32-bit PowerShell on a 64-bit OS:
 
 ```powershell
 powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\scripts\windows\awake.ps1 -Action start -Minutes 60
