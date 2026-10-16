@@ -13,6 +13,8 @@ Neither controller was installed on the development Mac during packaging. Real p
 
 - Adds versioned per-user network preferences, explicit setup/configure routing and reuse on subsequent starts. User preferences never enter the public repository.
 - macOS config: 6 isolated filesystem tests passed (missing state without writes, Unicode/shell-like SSIDs as data, mode replacement, invalid input preservation, corrupt/future schema preservation, symlink rejection). Existing 19 controller tests and shell syntax checks passed.
-- Skill packaging validator passed. New Windows configuration tests are included in native PowerShell 5.1 CI alongside the existing mocked controller lifecycle suite.
+- Skill packaging validator passed. Windows configuration tests and the existing mocked controller lifecycle suite passed on native PowerShell 5.1 CI. Both macOS and Windows jobs passed: https://github.com/Hype-yolo/awake-skill/actions/runs/38867693491 .
 - No live Wi-Fi switching, privileged installer, Windows UAC, physical lid-close or end-to-end recovery test was performed for this update. Windows still requires elevated power operations; saved preferences do not create passwordless privileges. macOS configuration requires Python 3.
 - Configuration writes use temporary files and atomic replacement. They are user preferences, not privileged command inputs; network actions remain host-tool operations with connection readback.
+
+Independent scenario review covered first setup with a supplied hotspot and duration, returning invocation, standard-user Windows setup, status without preferences, corrupted preferences, and a temporary network override. The Windows command examples and corrupt-file recovery instructions were corrected from that review. This was a workflow review, not a live hardware test.
